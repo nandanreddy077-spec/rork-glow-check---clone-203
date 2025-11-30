@@ -2,136 +2,136 @@ import { Platform } from "react-native";
 
 export type ThemeMode = 'light' | 'dark';
 
-// Masculine, performance-focused color palette inspired by tech and fitness brands
+// Masculine, performance-focused color palette - Dark mode first for premium feel
 const lightPalette = {
-  // Clean, modern backgrounds
-  background: "#FFFFFF", // Pure white
-  backgroundStart: "#FAFAFA", // Clean gray
-  backgroundEnd: "#F5F5F5", // Light gray
-  surface: "#FFFFFF", // Pure white
-  surfaceAlt: "#F8F9FA", // Subtle gray
-  surfaceElevated: "#FFFFFF", // White elevated
+  // Professional dark backgrounds for focus
+  background: "#0A0A0A", // Deep black
+  backgroundStart: "#0F0F11", // Dark gray
+  backgroundEnd: "#000000", // Pure black
+  surface: "#151518", // Dark surface
+  surfaceAlt: "#1A1A1D", // Elevated dark
+  surfaceElevated: "#1F1F23", // More elevated
 
-  // Bold, energetic accent colors
-  primary: "#FF6B35", // Energetic orange
-  secondary: "#2563EB", // Strong blue
-  tertiary: "#10B981", // Achievement green
+  // Bold, masculine accent colors
+  primary: "#00D9FF", // Electric cyan
+  secondary: "#7B61FF", // Tech purple
+  tertiary: "#00FF94", // Success green
   
   // Performance-focused colors
-  blush: "#FF6B35", // Energy orange
-  lavender: "#6366F1", // Tech purple
-  mint: "#10B981", // Success green
-  peach: "#F59E0B", // Warning amber
-  rose: "#EF4444", // Alert red
-  cream: "#F3F4F6", // Neutral gray
+  blush: "#FF3366", // Energy red
+  lavender: "#7B61FF", // Tech purple
+  mint: "#00FF94", // Success green
+  peach: "#FFB800", // Gold
+  rose: "#FF3366", // Bold red
+  cream: "#2A2A2E", // Dark neutral
   pearl: "#FFFFFF", // Clean white
   
-  // Bold metallics
-  gold: "#F59E0B", // Achievement gold
+  // Bold metallics for achievement
+  gold: "#FFB800", // Bright gold
   roseGold: "#FF6B35", // Energy orange
-  champagne: "#D97706", // Bronze
-  bronze: "#92400E", // Deep bronze
+  champagne: "#FFA724", // Rich amber
+  bronze: "#CD7F32", // Bronze
   
-  // Text hierarchy - high contrast
-  text: "#111827", // Near black
-  textPrimary: "#111827", // Near black
-  textSecondary: "#6B7280", // Cool gray
-  textMuted: "#9CA3AF", // Light gray
-  textAccent: "#FF6B35", // Orange accent
+  // Text hierarchy - optimized for dark
+  text: "#FFFFFF", // Pure white
+  textPrimary: "#FFFFFF", // Pure white
+  textSecondary: "#A0A0A8", // Cool gray
+  textMuted: "#6B6B70", // Muted gray
+  textAccent: "#00D9FF", // Cyan accent
   textLight: "#FFFFFF", // White
   
-  // System colors - bold approach
-  success: "#10B981", // Success green
-  warning: "#F59E0B", // Warning amber
-  error: "#EF4444", // Error red
-  info: "#2563EB", // Info blue
-  danger: "#DC2626", // Danger red
-  disabled: "#E5E7EB", // Disabled gray
+  // System colors - bold and clear
+  success: "#00FF94", // Bright green
+  warning: "#FFB800", // Bright yellow
+  error: "#FF3366", // Bold red
+  info: "#00D9FF", // Info cyan
+  danger: "#FF0040", // Danger red
+  disabled: "#3A3A3E", // Disabled dark gray
   
-  // Dividers and borders - subtle
-  divider: "#E5E7EB", // Light gray
-  border: "#D1D5DB", // Gray border
-  borderLight: "#F3F4F6", // Very light border
+  // Dividers and borders - subtle on dark
+  divider: "#2A2A2E", // Dark divider
+  border: "#3A3A3E", // Border
+  borderLight: "#2A2A2E", // Light border
   
   // Overlays and effects
-  overlayDark: "rgba(17,24,39,0.15)",
-  overlayLight: "rgba(255,255,255,0.95)",
-  overlayBlush: "rgba(255,107,53,0.15)",
-  overlayGold: "rgba(245,158,11,0.15)",
-  overlayLavender: "rgba(99,102,241,0.15)",
-  overlaySuccess: "rgba(16,185,129,0.15)",
-  overlayError: "rgba(239,68,68,0.15)",
+  overlayDark: "rgba(0,0,0,0.7)",
+  overlayLight: "rgba(255,255,255,0.1)",
+  overlayBlush: "rgba(0,217,255,0.15)",
+  overlayGold: "rgba(255,184,0,0.15)",
+  overlayLavender: "rgba(123,97,255,0.15)",
+  overlaySuccess: "rgba(0,255,148,0.15)",
+  overlayError: "rgba(255,51,102,0.15)",
   
   // Effects
   shimmer: "#FFFFFF",
-  glow: "#FF6B35",
-  highlight: "rgba(255,107,53,0.3)",
-  shadow: "rgba(17,24,39,0.08)",
+  glow: "#00D9FF",
+  highlight: "rgba(0,217,255,0.3)",
+  shadow: "rgba(0,0,0,0.5)",
 } as const;
 
 const darkPalette = {
-  // Deep, tech-inspired dark backgrounds
-  background: "#0F172A", // Deep slate
-  backgroundStart: "#0F172A", // Deep slate
-  backgroundEnd: "#020617", // Near black
-  surface: "#1E293B", // Dark slate
-  surfaceAlt: "#334155", // Medium slate
-  surfaceElevated: "#475569", // Elevated slate
+  // Deep, professional dark backgrounds
+  background: "#0A0A0A", // Deep black
+  backgroundStart: "#0F0F11", // Dark gray
+  backgroundEnd: "#000000", // Pure black
+  surface: "#151518", // Dark surface
+  surfaceAlt: "#1A1A1D", // Elevated dark
+  surfaceElevated: "#1F1F23", // More elevated
 
-  // Bold accent colors for dark mode
-  primary: "#FF6B35", // Energetic orange
-  secondary: "#3B82F6", // Bright blue
-  tertiary: "#10B981", // Achievement green
+  // Bold, masculine accent colors
+  primary: "#00D9FF", // Electric cyan
+  secondary: "#7B61FF", // Tech purple
+  tertiary: "#00FF94", // Success green
   
-  // Performance colors (dark adjusted)
-  blush: "#FF6B35", // Energy orange
-  lavender: "#818CF8", // Bright purple
-  mint: "#34D399", // Bright green
-  peach: "#FBBF24", // Bright amber
-  rose: "#F87171", // Bright red
-  cream: "#374151", // Dark gray
-  pearl: "#F9FAFB", // Off white
+  // Performance colors
+  blush: "#FF3366", // Energy red
+  lavender: "#7B61FF", // Tech purple
+  mint: "#00FF94", // Success green
+  peach: "#FFB800", // Gold
+  rose: "#FF3366", // Bold red
+  cream: "#2A2A2E", // Dark neutral
+  pearl: "#FFFFFF", // Clean white
   
-  // Bold metallics for dark
-  gold: "#FBBF24", // Bright gold
+  // Bold metallics
+  gold: "#FFB800", // Bright gold
   roseGold: "#FF6B35", // Energy orange
-  champagne: "#F59E0B", // Amber
-  bronze: "#D97706", // Deep amber
+  champagne: "#FFA724", // Rich amber
+  bronze: "#CD7F32", // Bronze
   
-  // Text hierarchy - optimized for dark
-  text: "#F9FAFB", // Off white
-  textPrimary: "#F9FAFB", // Off white
-  textSecondary: "#D1D5DB", // Light gray
-  textMuted: "#9CA3AF", // Medium gray
-  textAccent: "#FF6B35", // Orange accent
-  textLight: "#FFFFFF", // Pure white
+  // Text hierarchy
+  text: "#FFFFFF", // Pure white
+  textPrimary: "#FFFFFF", // Pure white
+  textSecondary: "#A0A0A8", // Cool gray
+  textMuted: "#6B6B70", // Muted gray
+  textAccent: "#00D9FF", // Cyan accent
+  textLight: "#FFFFFF", // White
   
-  // System colors for dark mode
-  success: "#10B981", // Success green
-  warning: "#F59E0B", // Warning amber
-  error: "#EF4444", // Error red
-  info: "#3B82F6", // Info blue
-  danger: "#DC2626", // Danger red
+  // System colors
+  success: "#00FF94", // Bright green
+  warning: "#FFB800", // Bright yellow
+  error: "#FF3366", // Bold red
+  info: "#00D9FF", // Info cyan
+  danger: "#FF0040", // Danger red
   
   // Dividers and borders
-  divider: "#334155", // Slate divider
-  border: "#475569", // Slate border
-  borderLight: "#64748B", // Light slate
+  divider: "#2A2A2E", // Dark divider
+  border: "#3A3A3E", // Border
+  borderLight: "#2A2A2E", // Light border
   
   // Overlays and effects
-  overlayDark: "rgba(0,0,0,0.5)",
+  overlayDark: "rgba(0,0,0,0.7)",
   overlayLight: "rgba(255,255,255,0.1)",
-  overlayBlush: "rgba(255,107,53,0.2)",
-  overlayGold: "rgba(251,191,36,0.2)",
-  overlayLavender: "rgba(129,140,248,0.2)",
-  overlaySuccess: "rgba(16,185,129,0.2)",
-  overlayError: "rgba(239,68,68,0.2)",
+  overlayBlush: "rgba(0,217,255,0.15)",
+  overlayGold: "rgba(255,184,0,0.15)",
+  overlayLavender: "rgba(123,97,255,0.15)",
+  overlaySuccess: "rgba(0,255,148,0.15)",
+  overlayError: "rgba(255,51,102,0.15)",
   
   // Effects
-  shimmer: "#F9FAFB",
-  glow: "#FF6B35",
-  highlight: "rgba(255,107,53,0.3)",
-  shadow: "rgba(0,0,0,0.3)",
+  shimmer: "#FFFFFF",
+  glow: "#00D9FF",
+  highlight: "rgba(0,217,255,0.3)",
+  shadow: "rgba(0,0,0,0.5)",
 } as const;
 
 export const getPalette = (theme: ThemeMode) => {
@@ -261,67 +261,67 @@ export const shadow = {
 } as const;
 
 const lightGradient = {
-  // Primary brand gradients
-  primary: ["#FF6B35", "#F97316"] as const, // Orange energy
-  secondary: ["#2563EB", "#1D4ED8"] as const, // Deep blue
-  tertiary: ["#10B981", "#059669"] as const, // Success green
+  // Primary brand gradients - Bold and electric
+  primary: ["#00D9FF", "#00A3CC"] as const, // Electric cyan
+  secondary: ["#7B61FF", "#5A3FCC"] as const, // Tech purple
+  tertiary: ["#00FF94", "#00CC77"] as const, // Success green
   
-  // Background gradients
-  hero: ["#FFFFFF", "#F9FAFB"] as const, // Clean white
-  surface: ["#FFFFFF", "#F9FAFB"] as const, // White gradient
-  card: ["#FFFFFF", "#FAFAFA"] as const, // Subtle gradient
+  // Background gradients - Deep and professional
+  hero: ["#0F0F11", "#000000"] as const, // Dark gradient
+  surface: ["#151518", "#1A1A1D"] as const, // Dark surface
+  card: ["#1A1A1D", "#1F1F23"] as const, // Elevated dark
   
   // Performance themed gradients
-  gold: ["#FBBF24", "#F59E0B", "#D97706"] as const, // Gold achievement
-  rose: ["#FF6B35", "#F97316", "#EA580C"] as const, // Orange energy
-  lavender: ["#6366F1", "#4F46E5", "#4338CA"] as const, // Purple tech
-  mint: ["#10B981", "#059669", "#047857"] as const, // Green success
+  gold: ["#FFB800", "#FFA724", "#FF8800"] as const, // Gold achievement
+  rose: ["#FF3366", "#FF0040", "#CC0033"] as const, // Energy red
+  lavender: ["#7B61FF", "#6B51EE", "#5A3FCC"] as const, // Purple tech
+  mint: ["#00FF94", "#00E585", "#00CC77"] as const, // Green success
   
   // Special effects
-  shimmer: ["#FFFFFF", "#FF6B35", "#FFFFFF"] as const, // Energy shimmer
-  glow: ["rgba(255,107,53,0.4)", "rgba(255,107,53,0.2)", "rgba(255,107,53,0.1)"] as const,
-  aurora: ["#FF6B35", "#2563EB", "#10B981", "#F59E0B"] as const, // Multi-color performance
+  shimmer: ["#00D9FF", "#FFFFFF", "#00D9FF"] as const, // Electric shimmer
+  glow: ["rgba(0,217,255,0.4)", "rgba(0,217,255,0.2)", "rgba(0,217,255,0.1)"] as const,
+  aurora: ["#00D9FF", "#7B61FF", "#00FF94", "#FFB800"] as const, // Multi-color performance
   
   // Context gradients
-  success: ["#10B981", "#059669"] as const,
-  warning: ["#F59E0B", "#D97706"] as const,
-  error: ["#EF4444", "#DC2626"] as const,
-  info: ["#2563EB", "#1D4ED8"] as const,
+  success: ["#00FF94", "#00CC77"] as const,
+  warning: ["#FFB800", "#FF8800"] as const,
+  error: ["#FF3366", "#CC0033"] as const,
+  info: ["#00D9FF", "#00A3CC"] as const,
   
   // Premium paywall
-  paywall: ["#0F172A", "#1E293B"] as const,
+  paywall: ["#0A0A0A", "#151518"] as const,
 } as const;
 
 const darkGradient = {
-  // Primary brand gradients
-  primary: ["#FF6B35", "#F97316"] as const, // Orange energy
-  secondary: ["#3B82F6", "#2563EB"] as const, // Bright blue
-  tertiary: ["#10B981", "#059669"] as const, // Achievement green
+  // Primary brand gradients - Bold and electric
+  primary: ["#00D9FF", "#00A3CC"] as const, // Electric cyan
+  secondary: ["#7B61FF", "#5A3FCC"] as const, // Tech purple
+  tertiary: ["#00FF94", "#00CC77"] as const, // Success green
   
-  // Background gradients
-  hero: ["#0F172A", "#020617"] as const, // Deep slate to black
-  surface: ["#1E293B", "#334155"] as const, // Slate gradient
-  card: ["#1E293B", "#475569"] as const, // Elevated slate
+  // Background gradients - Deep and professional
+  hero: ["#0F0F11", "#000000"] as const, // Dark gradient
+  surface: ["#151518", "#1A1A1D"] as const, // Dark surface
+  card: ["#1A1A1D", "#1F1F23"] as const, // Elevated dark
   
   // Performance themed gradients
-  gold: ["#FBBF24", "#F59E0B", "#D97706"] as const, // Bright gold
-  rose: ["#FF6B35", "#F97316", "#EA580C"] as const, // Orange energy
-  lavender: ["#818CF8", "#6366F1", "#4F46E5"] as const, // Bright purple
-  mint: ["#34D399", "#10B981", "#059669"] as const, // Bright green
+  gold: ["#FFB800", "#FFA724", "#FF8800"] as const, // Gold achievement
+  rose: ["#FF3366", "#FF0040", "#CC0033"] as const, // Energy red
+  lavender: ["#7B61FF", "#6B51EE", "#5A3FCC"] as const, // Purple tech
+  mint: ["#00FF94", "#00E585", "#00CC77"] as const, // Green success
   
   // Special effects
-  shimmer: ["#F9FAFB", "#FF6B35", "#F9FAFB"] as const, // Energy shimmer
-  glow: ["rgba(255,107,53,0.3)", "rgba(255,107,53,0.15)", "rgba(255,107,53,0.05)"] as const,
-  aurora: ["#FF6B35", "#3B82F6", "#10B981", "#FBBF24"] as const, // Vibrant multi-color
+  shimmer: ["#00D9FF", "#FFFFFF", "#00D9FF"] as const, // Electric shimmer
+  glow: ["rgba(0,217,255,0.4)", "rgba(0,217,255,0.2)", "rgba(0,217,255,0.1)"] as const,
+  aurora: ["#00D9FF", "#7B61FF", "#00FF94", "#FFB800"] as const, // Multi-color performance
   
   // Context gradients
-  success: ["#10B981", "#059669"] as const,
-  warning: ["#F59E0B", "#D97706"] as const,
-  error: ["#EF4444", "#DC2626"] as const,
-  info: ["#3B82F6", "#2563EB"] as const,
+  success: ["#00FF94", "#00CC77"] as const,
+  warning: ["#FFB800", "#FF8800"] as const,
+  error: ["#FF3366", "#CC0033"] as const,
+  info: ["#00D9FF", "#00A3CC"] as const,
   
   // Premium paywall
-  paywall: ["#0F172A", "#1E293B"] as const,
+  paywall: ["#0A0A0A", "#151518"] as const,
 } as const;
 
 export const getGradient = (theme: ThemeMode) => {

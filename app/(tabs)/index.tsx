@@ -28,23 +28,23 @@ const { width: screenWidth } = Dimensions.get('window');
 
 const DAILY_MOTIVATIONS = [
   {
-    text: "Push your limits. Own your transformation.",
-    author: "Performance Mindset",
+    text: "Success is built in the dark. Your edge is discipline.",
+    author: "Performance Protocol",
     icon: Trophy,
   },
   {
-    text: "Consistency beats intensity. Show up daily.",
-    author: "Growth Protocol",
+    text: "Optimize daily. Compound results. Dominate outcomes.",
+    author: "Elite Performance",
     icon: Target,
   },
   {
-    text: "Your discipline today builds tomorrow's results.",
-    author: "Peak Performance",
+    text: "1% better every day. That's 37x improvement in a year.",
+    author: "Peak Optimization",
     icon: TrendingUp,
   },
   {
-    text: "Master the fundamentals. Dominate the details.",
-    author: "Elite Habits",
+    text: "Winners focus on systems. Losers focus on goals.",
+    author: "Performance Mindset",
     icon: Award,
   },
 ];
@@ -52,53 +52,53 @@ const DAILY_MOTIVATIONS = [
 const PERFORMANCE_TOOLS = [
   {
     id: 'analysis',
-    title: 'Performance Scan',
-    subtitle: 'Track your transformation',
-    description: 'AI-powered analysis to measure progress',
+    title: 'Image Analysis',
+    subtitle: 'Track transformation metrics',
+    description: 'AI-powered visual progress tracking',
     icon: Camera,
-    gradient: ['#FF6B35', '#F97316'],
+    gradient: ['#00D9FF', '#00A3CC'],
     route: '/glow-analysis',
-    badge: 'Core',
+    badge: 'CORE',
   },
   {
     id: 'style-optimization',
-    title: 'Style Optimizer',
-    subtitle: 'Maximize your presence',
-    description: 'Data-driven style recommendations',
+    title: 'Style Intel',
+    subtitle: 'Optimize your presence',
+    description: 'Data-driven appearance strategy',
     icon: Target,
-    gradient: ['#2563EB', '#1D4ED8'],
+    gradient: ['#7B61FF', '#5A3FCC'],
     route: '/style-check',
-    badge: 'Strategic',
+    badge: 'PRO',
   },
   {
     id: 'performance-tracker',
-    title: 'Performance Hub',
-    subtitle: 'Your results dashboard',
-    description: 'Daily metrics and achievement tracking',
+    title: 'Dashboard',
+    subtitle: 'Your performance metrics',
+    description: 'Real-time tracking & analytics',
     icon: BarChart3,
-    gradient: ['#10B981', '#059669'],
+    gradient: ['#00FF94', '#00CC77'],
     route: '/glow-coach',
-    badge: 'Data',
+    badge: 'DATA',
   },
   {
     id: 'ai-coach',
-    title: 'AI Performance Coach',
-    subtitle: 'Real-time optimization',
-    description: 'Get instant expert guidance on demand',
+    title: 'AI Advisor',
+    subtitle: 'Expert optimization',
+    description: 'Instant strategic guidance',
     icon: Zap,
-    gradient: ['#F59E0B', '#D97706'],
+    gradient: ['#FFB800', '#FF8800'],
     route: '/ai-advisor',
-    badge: 'Elite',
+    badge: 'AI',
   },
   {
     id: 'trend-intel',
-    title: 'Trend Intelligence',
-    subtitle: 'Stay ahead of the curve',
-    description: 'Weekly insights and strategic updates',
+    title: 'Market Intel',
+    subtitle: 'Stay ahead',
+    description: 'Weekly trends & insights',
     icon: Navigation,
-    gradient: ['#6366F1', '#4F46E5'],
+    gradient: ['#FF3366', '#CC0033'],
     route: '/trends',
-    badge: 'Intel',
+    badge: 'INTEL',
   },
 ];
 
@@ -241,6 +241,9 @@ export default function HomeScreen() {
               <Trophy color={palette.primary} size={24} strokeWidth={2.5} />
             </View>
             <Text style={styles.logoText}>APEX</Text>
+            <View style={styles.betaBadge}>
+              <Text style={styles.betaBadgeText}>BETA</Text>
+            </View>
           </View>
           
           <View style={styles.streakContainer}>
@@ -253,14 +256,11 @@ export default function HomeScreen() {
         
         <View style={styles.header}>
           <View style={styles.headerContent}>
-            <Text style={styles.greeting}>Welcome back,</Text>
+            <Text style={styles.greeting}>READY TO DOMINATE</Text>
             <View style={styles.nameContainer}>
               <Text style={styles.name}>{authUser?.user_metadata && typeof authUser.user_metadata === 'object' ? (authUser.user_metadata as { full_name?: string; name?: string }).full_name ?? (authUser.user_metadata as { full_name?: string; name?: string }).name ?? user.name : user.name}</Text>
-              <View style={styles.crownContainer}>
-                <Trophy color={palette.primary} size={20} fill={palette.primary} />
-              </View>
             </View>
-            <Text style={styles.subtitle}>Track. Optimize. Dominate.</Text>
+            <Text style={styles.subtitle}>Your competitive edge starts here</Text>
           </View>
           <TouchableOpacity onPress={handleProfilePress} activeOpacity={0.8} style={styles.avatarContainer}>
             {user.avatar ? (
@@ -286,13 +286,13 @@ export default function HomeScreen() {
                 <Target color={palette.textLight} size={32} strokeWidth={2.5} />
                 <View style={styles.iconShimmer} />
               </View>
-              <Text style={styles.ctaTitle}>Scan Your{"\n"}Performance</Text>
+              <Text style={styles.ctaTitle}>SCAN & ANALYZE</Text>
               <Text style={styles.ctaSubtitle}>
-                AI-powered analysis to{"\n"}track your transformation
+                AI-powered tracking.{"\n"}Measure what matters.
               </Text>
               <View style={styles.ctaBadge}>
                 <Zap color={palette.textLight} size={14} fill={palette.textLight} />
-                <Text style={styles.ctaBadgeText}>Data-Driven</Text>
+                <Text style={styles.ctaBadgeText}>INSTANT RESULTS</Text>
               </View>
             </View>
             <ChevronRight color={palette.textPrimary} size={24} style={styles.ctaArrow} strokeWidth={2.5} />
@@ -308,15 +308,11 @@ export default function HomeScreen() {
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
             <View style={styles.sectionTitleRow}>
-              <TrendingUp color={palette.gold} size={24} strokeWidth={2.5} />
-              <Text style={styles.sectionTitle}>Your Progress Hub</Text>
-            </View>
-            <View style={styles.newBadge}>
-              <Zap color={palette.textLight} size={10} fill={palette.textLight} />
-              <Text style={styles.newBadgeText}>NEW</Text>
+              <BarChart3 color={palette.primary} size={24} strokeWidth={2.5} />
+              <Text style={styles.sectionTitle}>PERFORMANCE METRICS</Text>
             </View>
           </View>
-          <Text style={styles.sectionSubtitle}>Track your glow journey & product routines</Text>
+          <Text style={styles.sectionSubtitle}>Data-driven progress tracking</Text>
           
           <View style={styles.progressHubGrid}>
             <TouchableOpacity 
@@ -333,13 +329,13 @@ export default function HomeScreen() {
                 <View style={styles.progressHubIcon}>
                   <TrendingUp color={palette.textLight} size={28} strokeWidth={2.5} />
                 </View>
-                <Text style={styles.progressHubTitle}>Progress Photos</Text>
+                <Text style={styles.progressHubTitle}>Visual Tracking</Text>
                 <View style={styles.progressHubStats}>
                   <Text style={styles.progressHubNumber}>{user.stats.analyses || 0}</Text>
-                  <Text style={styles.progressHubLabel}>snapshots</Text>
+                  <Text style={styles.progressHubLabel}>scans</Text>
                 </View>
                 <View style={styles.progressHubButton}>
-                  <Text style={styles.progressHubButtonText}>TRACK CHANGES</Text>
+                  <Text style={styles.progressHubButtonText}>VIEW DATA</Text>
                   <ArrowRight color={palette.textLight} size={16} strokeWidth={3} />
                 </View>
                 
@@ -363,13 +359,13 @@ export default function HomeScreen() {
                 <View style={styles.progressHubIcon}>
                   <Package color={palette.textLight} size={28} strokeWidth={2.5} />
                 </View>
-                <Text style={styles.progressHubTitle}>Product Tracker</Text>
+                <Text style={styles.progressHubTitle}>Optimization Stack</Text>
                 <View style={styles.progressHubStats}>
                   <Text style={styles.progressHubNumber}>{products.length}</Text>
                   <Text style={styles.progressHubLabel}>products</Text>
                 </View>
                 <View style={styles.progressHubButton}>
-                  <Text style={styles.progressHubButtonText}>ADD PRODUCT</Text>
+                  <Text style={styles.progressHubButtonText}>MANAGE</Text>
                   <ArrowRight color={palette.textLight} size={16} strokeWidth={3} />
                 </View>
                 
@@ -383,8 +379,8 @@ export default function HomeScreen() {
 
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
-            <Text style={styles.sectionTitle}>Performance Tools</Text>
-            <View style={styles.sectionDivider} />
+            <Text style={styles.sectionTitle}>OPTIMIZATION TOOLS</Text>
+            <View style={[styles.sectionDivider, { backgroundColor: palette.primary }]} />
           </View>
           
           <TouchableOpacity onPress={handleGlowAnalysis} activeOpacity={0.9}>
@@ -403,11 +399,11 @@ export default function HomeScreen() {
                 </LinearGradient>
               </View>
               <View style={styles.actionContent}>
-                <Text style={styles.actionTitle}>Performance Scan</Text>
-                <Text style={styles.actionSubtitle}>Track your transformation progress</Text>
+                <Text style={styles.actionTitle}>Image Analysis</Text>
+                <Text style={styles.actionSubtitle}>AI-powered progress tracking</Text>
                 <View style={styles.actionBadge}>
                   <Activity color={palette.primary} size={12} strokeWidth={2.5} />
-                  <Text style={[styles.actionBadgeText, { color: palette.primary }]}>Core</Text>
+                  <Text style={[styles.actionBadgeText, { color: palette.primary }]}>CORE</Text>
                 </View>
               </View>
               <View style={styles.actionArrow}>
@@ -432,11 +428,11 @@ export default function HomeScreen() {
                 </LinearGradient>
               </View>
               <View style={styles.actionContent}>
-                <Text style={styles.actionTitle}>Style Optimizer</Text>
-                <Text style={styles.actionSubtitle}>Maximize your presence</Text>
+                <Text style={styles.actionTitle}>Style Intel</Text>
+                <Text style={styles.actionSubtitle}>Strategic appearance optimization</Text>
                 <View style={styles.actionBadge}>
                   <BarChart3 color={palette.secondary} size={12} strokeWidth={2.5} />
-                  <Text style={[styles.actionBadgeText, { color: palette.secondary }]}>Strategic</Text>
+                  <Text style={[styles.actionBadgeText, { color: palette.secondary }]}>PRO</Text>
                 </View>
               </View>
               <View style={styles.actionArrow}>
@@ -461,11 +457,11 @@ export default function HomeScreen() {
                 </LinearGradient>
               </View>
               <View style={styles.actionContent}>
-                <Text style={styles.actionTitle}>Performance Hub</Text>
-                <Text style={styles.actionSubtitle}>Track daily metrics & achievements</Text>
+                <Text style={styles.actionTitle}>Performance Dashboard</Text>
+                <Text style={styles.actionSubtitle}>Real-time metrics & analytics</Text>
                 <View style={styles.actionBadge}>
                   <Trophy color={palette.tertiary} size={12} fill={palette.tertiary} />
-                  <Text style={[styles.actionBadgeText, { color: palette.tertiary }]}>Data</Text>
+                  <Text style={[styles.actionBadgeText, { color: palette.tertiary }]}>DATA</Text>
                 </View>
               </View>
               <View style={styles.actionArrow}>
@@ -477,8 +473,8 @@ export default function HomeScreen() {
 
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
-            <Text style={styles.sectionTitle}>Daily Mindset</Text>
-            <View style={styles.sectionDivider} />
+            <Text style={styles.sectionTitle}>PERFORMANCE MINDSET</Text>
+            <View style={[styles.sectionDivider, { backgroundColor: palette.primary }]} />
           </View>
           <View style={[styles.quoteCard, shadow.card]}>
             <View style={styles.quoteIconContainer}>
@@ -493,8 +489,8 @@ export default function HomeScreen() {
 
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
-            <Text style={styles.sectionTitle}>Your Progress</Text>
-            <View style={styles.sectionDivider} />
+            <Text style={styles.sectionTitle}>KEY METRICS</Text>
+            <View style={[styles.sectionDivider, { backgroundColor: palette.primary }]} />
           </View>
           <View style={[styles.statsContainer, shadow.card]}>
             <View style={styles.statItem}>
@@ -551,7 +547,19 @@ const createStyles = (palette: ReturnType<typeof getPalette>) => StyleSheet.crea
   logoContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 12,
+    gap: 8,
+  },
+  betaBadge: {
+    backgroundColor: palette.primary,
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+    borderRadius: 4,
+  },
+  betaBadgeText: {
+    fontSize: 9,
+    fontWeight: '900' as const,
+    color: palette.background,
+    letterSpacing: 1,
   },
   logoImage: {
     width: 40,
@@ -567,10 +575,10 @@ const createStyles = (palette: ReturnType<typeof getPalette>) => StyleSheet.crea
     alignItems: 'center',
   },
   logoText: {
-    fontSize: 22,
-    fontWeight: '800' as const,
+    fontSize: 24,
+    fontWeight: '900' as const,
     color: palette.textPrimary,
-    letterSpacing: -0.5,
+    letterSpacing: 2,
   },
   streakContainer: {
     alignItems: 'center',
@@ -620,11 +628,11 @@ const createStyles = (palette: ReturnType<typeof getPalette>) => StyleSheet.crea
     flex: 1,
   },
   greeting: {
-    fontSize: 16,
-    color: palette.textSecondary,
+    fontSize: 12,
+    color: palette.textMuted,
     marginBottom: 6,
-    letterSpacing: 0.5,
-    fontWeight: "500",
+    letterSpacing: 2,
+    fontWeight: "800",
   },
   nameContainer: {
     flexDirection: "row",
@@ -632,20 +640,19 @@ const createStyles = (palette: ReturnType<typeof getPalette>) => StyleSheet.crea
     marginBottom: 12,
   },
   name: {
-    fontSize: 32,
-    fontWeight: "800",
+    fontSize: 36,
+    fontWeight: "900",
     color: palette.textPrimary,
-    marginRight: 12,
-    letterSpacing: -0.5,
+    letterSpacing: -1,
   },
   crownContainer: {
     marginTop: 4,
   },
   subtitle: {
-    fontSize: 17,
-    color: palette.textSecondary,
-    fontWeight: "500",
-    letterSpacing: 0.3,
+    fontSize: 14,
+    color: palette.textMuted,
+    fontWeight: "600",
+    letterSpacing: 0.5,
   },
   avatarContainer: {
     position: "relative",
@@ -715,12 +722,12 @@ const createStyles = (palette: ReturnType<typeof getPalette>) => StyleSheet.crea
     backgroundColor: palette.overlayLight,
   },
   ctaTitle: {
-    fontSize: 28,
+    fontSize: 32,
     fontWeight: "900",
     color: palette.textPrimary,
     marginBottom: 12,
-    lineHeight: 32,
-    letterSpacing: -0.5,
+    lineHeight: 36,
+    letterSpacing: 1,
   },
   ctaSubtitle: {
     fontSize: 16,
@@ -776,11 +783,11 @@ const createStyles = (palette: ReturnType<typeof getPalette>) => StyleSheet.crea
     justifyContent: 'space-between',
   },
   sectionTitle: {
-    fontSize: 22,
-    fontWeight: "800",
+    fontSize: 18,
+    fontWeight: "900",
     color: palette.textPrimary,
     marginBottom: 8,
-    letterSpacing: -0.3,
+    letterSpacing: 2,
   },
   sectionDivider: {
     height: 2,
@@ -906,10 +913,10 @@ const createStyles = (palette: ReturnType<typeof getPalette>) => StyleSheet.crea
   },
   actionTitle: {
     fontSize: 18,
-    fontWeight: "800",
+    fontWeight: "900",
     color: palette.textPrimary,
     marginBottom: 6,
-    letterSpacing: -0.2,
+    letterSpacing: 0.5,
   },
   actionSubtitle: {
     fontSize: 14,
@@ -928,10 +935,10 @@ const createStyles = (palette: ReturnType<typeof getPalette>) => StyleSheet.crea
   },
   actionBadgeText: {
     color: palette.gold,
-    fontSize: 11,
-    fontWeight: "700",
+    fontSize: 10,
+    fontWeight: "900",
     marginLeft: 4,
-    letterSpacing: 0.5,
+    letterSpacing: 1,
   },
   quoteCard: {
     padding: 28,
