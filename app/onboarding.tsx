@@ -103,19 +103,19 @@ export default function OnboardingScreen() {
   const handleNext = useCallback(async () => {
     if (currentIndex === 3) {
       if (!fullName.trim() || !email.trim() || !password.trim() || !confirmPassword.trim()) {
-        Alert.alert('Beautiful Journey Awaits', 'Please fill in all fields to begin your radiant transformation.');
+        Alert.alert('Almost There', 'Please fill in all fields to start your journey.');
         return;
       }
       if (!acceptTerms) {
-        Alert.alert('Terms & Conditions', 'Please accept our terms and conditions to continue your beautiful journey.');
+        Alert.alert('Terms & Conditions', 'Please accept our terms and conditions to continue.');
         return;
       }
       if (password !== confirmPassword) {
-        Alert.alert('Almost There', 'Your passwords don\'t match. Let\'s make sure they\'re perfectly aligned.');
+        Alert.alert('Password Mismatch', 'Your passwords don\'t match. Please try again.');
         return;
       }
       if (password.length < 6) {
-        Alert.alert('Secure Your Beauty', 'Please choose a password with at least 6 characters to protect your glow journey.');
+        Alert.alert('Weak Password', 'Please choose a password with at least 6 characters.');
         return;
       }
       
@@ -124,7 +124,7 @@ export default function OnboardingScreen() {
       setIsLoading(false);
       
       if (error) {
-        Alert.alert('Welcome Beautiful', 'Something went wrong, but don\'t worry - your glow journey is still waiting for you. Please try again.');
+        Alert.alert('Error', 'Something went wrong. Please try again.');
         return;
       }
       
@@ -136,7 +136,7 @@ export default function OnboardingScreen() {
     
     if (currentIndex === 4) {
       if (!email.trim() || !password.trim()) {
-        Alert.alert('Gentle Reminder', 'Please fill in all fields to continue your beautiful journey.');
+        Alert.alert('Required Fields', 'Please fill in all fields to continue.');
         return;
       }
       
@@ -252,8 +252,8 @@ export default function OnboardingScreen() {
         </Animated.View>
 
         <View style={styles.content}>
-          <Text style={styles.title}>Your Glow Journey{'\n'}Starts Here</Text>
-          <Text style={styles.subtitle}>Unlock your radiant potential with personalized beauty insights powered by AI</Text>
+          <Text style={styles.title}>Become The{'\n'}Best Version</Text>
+          <Text style={styles.subtitle}>Track habits, build discipline, compete with others. Your transformation starts now.</Text>
           
           <View style={styles.featuresRow}>
             {features.map((feature, idx) => (
@@ -312,8 +312,8 @@ export default function OnboardingScreen() {
         </Animated.View>
 
         <View style={styles.content}>
-          <Text style={styles.title}>Beauty That{'\n'}Evolves With You</Text>
-          <Text style={styles.subtitle}>Your personalized beauty companion that grows with your journey</Text>
+          <Text style={styles.title}>Consistency{'\n'}Builds Champions</Text>
+          <Text style={styles.subtitle}>Daily habits compound into extraordinary results. Track your progress every single day.</Text>
           
           <View style={styles.featuresRow}>
             {features.map((feature, idx) => (
@@ -372,8 +372,8 @@ export default function OnboardingScreen() {
         </Animated.View>
 
         <View style={styles.content}>
-          <Text style={styles.title}>Join 100K+{'\n'}Glowing Together</Text>
-          <Text style={styles.subtitle}>Be part of a supportive community on the same beautiful journey</Text>
+          <Text style={styles.title}>Compete &{'\n'}Dominate</Text>
+          <Text style={styles.subtitle}>Join 100K+ men crushing their goals. Leaderboards, challenges, and real accountability.</Text>
           
           <View style={styles.featuresRow}>
             {features.map((feature, idx) => (
@@ -431,8 +431,8 @@ export default function OnboardingScreen() {
                 </LinearGradient>
               </Animated.View>
               
-              <Text style={styles.formTitle}>Join GlowCheck</Text>
-              <Text style={styles.formSubtitle}>Create your account and start your transformation</Text>
+              <Text style={styles.formTitle}>Join Apex</Text>
+              <Text style={styles.formSubtitle}>Create your account and start dominating your goals</Text>
             </View>
 
             <View style={styles.form}>
@@ -440,7 +440,7 @@ export default function OnboardingScreen() {
                 <UserIcon size={20} color={palette.primary} style={styles.inputIcon} />
                 <TextInput
                   style={styles.input}
-                  placeholder="Your beautiful name"
+                  placeholder="Full Name"
                   placeholderTextColor={palette.textMuted}
                   value={fullName}
                   onChangeText={setFullName}
@@ -548,8 +548,8 @@ export default function OnboardingScreen() {
                 </LinearGradient>
               </Animated.View>
               
-              <Text style={styles.formTitle}>Welcome to GlowCheck</Text>
-              <Text style={styles.formSubtitle}>Sign in to continue your glow journey</Text>
+              <Text style={styles.formTitle}>Welcome Back</Text>
+              <Text style={styles.formSubtitle}>Sign in to continue your journey to greatness</Text>
             </View>
 
             <View style={styles.form}>
@@ -590,7 +590,7 @@ export default function OnboardingScreen() {
             <View style={styles.formFooter}>
               <TouchableOpacity onPress={switchToSignup}>
                 <Text style={styles.switchText}>
-                  New to our beautiful community? <Text style={styles.switchLink}>Join Us</Text>
+                  New here? <Text style={styles.switchLink}>Create Account</Text>
                 </Text>
               </TouchableOpacity>
             </View>
@@ -602,11 +602,11 @@ export default function OnboardingScreen() {
 
   const getButtonText = () => {
     switch (currentIndex) {
-      case 0: return 'Discover Your Glow';
+      case 0: return 'Start Winning';
       case 1: return 'Continue';
-      case 2: return 'Begin Free Trial';
-      case 3: return isLoading ? 'Creating Your Journey...' : 'Begin My Glow Journey';
-      case 4: return isLoading ? 'Signing In...' : 'Continue My Journey';
+      case 2: return 'Get Started Free';
+      case 3: return isLoading ? 'Creating Account...' : 'Create Account';
+      case 4: return isLoading ? 'Signing In...' : 'Sign In';
       default: return 'Continue';
     }
   };
