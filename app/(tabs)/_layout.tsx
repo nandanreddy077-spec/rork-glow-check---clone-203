@@ -86,9 +86,9 @@ export default function TabLayout() {
           }}
         />
         <Tabs.Screen
-          name="glow-coach"
+          name="habit-builder"
           options={{
-            title: "Performance",
+            title: "Habits",
             tabBarIcon: ({ color, size, focused }) => (
               <View style={{ 
                 padding: 8, 
@@ -102,6 +102,12 @@ export default function TabLayout() {
                 />
               </View>
             ),
+          }}
+        />
+        <Tabs.Screen
+          name="glow-coach"
+          options={{
+            href: null,
           }}
         />
         <Tabs.Screen

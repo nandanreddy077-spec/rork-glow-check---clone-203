@@ -488,7 +488,7 @@ export default function CommunityScreen() {
     <View style={[styles.container, { paddingTop: insets.top }]}>
       <View style={styles.header}>
         <View style={styles.headerLeft}>
-          <Text style={styles.appTitle}>Beauty Circle</Text>
+          <Text style={styles.appTitle}>Brotherhood</Text>
           <TouchableOpacity 
             style={styles.circleSelector}
             onPress={() => setShowCircles(true)}
@@ -523,7 +523,7 @@ export default function CommunityScreen() {
           <Search size={18} color={palette.textSecondary} />
           <TextInput
             style={styles.searchInput}
-            placeholder="Search posts, people, hashtags..."
+            placeholder="Search posts, challenges, members..."
             placeholderTextColor={palette.textMuted}
             value={searchQuery}
             onChangeText={setSearchQuery}
@@ -649,7 +649,7 @@ export default function CommunityScreen() {
               <Sparkles color={palette.textSecondary} size={48} />
               <Text style={styles.emptyTitle}>No posts yet</Text>
               <Text style={styles.emptyText}>
-                {searchQuery ? 'No posts match your search' : 'Start following circles to see posts!'}
+                {searchQuery ? 'No posts match your search' : 'Join communities to see posts from the brotherhood!'}
               </Text>
             </View>
           )}
