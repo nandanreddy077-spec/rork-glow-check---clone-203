@@ -48,25 +48,25 @@ interface ChatMessage {
   };
 }
 
-const BEAUTY_TOPICS = [
-  { id: 'skincare', title: 'Skincare Routine', icon: '✨', color: '#F2C2C2' },
-  { id: 'makeup', title: 'Makeup Tips', icon: '💄', color: '#E8D5F0' },
-  { id: 'haircare', title: 'Hair Care', icon: '💇‍♀️', color: '#D4F0E8' },
-  { id: 'wellness', title: 'Beauty Wellness', icon: '🧘‍♀️', color: '#F5D5C2' },
-  { id: 'products', title: 'Product Advice', icon: '🛍️', color: '#E8A87C' },
-  { id: 'trends', title: 'Latest Trends', icon: '🔥', color: '#D4A574' },
+const COACH_TOPICS = [
+  { id: 'workout', title: 'Workout Plan', icon: '💪', color: '#FF3366' },
+  { id: 'nutrition', title: 'Nutrition', icon: '🍖', color: '#00D9FF' },
+  { id: 'mindset', title: 'Mindset', icon: '🧠', color: '#7B61FF' },
+  { id: 'style', title: 'Style & Grooming', icon: '✨', color: '#FFB800' },
+  { id: 'recovery', title: 'Recovery', icon: '😴', color: '#00FF94' },
+  { id: 'testosterone', title: 'Testosterone', icon: '🔥', color: '#FF6B35' },
 ];
 
 const QUICK_QUESTIONS = [
-  "What's the best morning skincare routine?",
-  "How to get rid of dark circles?",
-  "Best makeup for my skin tone?",
-  "Natural remedies for acne?",
-  "How to make my hair shinier?",
-  "Anti-aging tips for 20s/30s?",
+  "Create a muscle-building workout plan",
+  "What should I eat to lose fat & build muscle?",
+  "How do I increase my testosterone naturally?",
+  "Best morning routine for peak performance?",
+  "How to improve my style and grooming?",
+  "Tips for better sleep and recovery?",
 ];
 
-export default function AIAdvisorScreen() {
+export default function TransformationCoachScreen() {
   const { theme } = useTheme();
   const { user } = useUser();
   const { state } = useSubscription();
@@ -80,58 +80,78 @@ export default function AIAdvisorScreen() {
   const palette = getPalette(theme);
   const gradient = getGradient(theme);
 
+  const COACH_SYSTEM = `You are a high-performance transformation coach for men. Think David Goggins meets Andrew Huberman.
+
+Your style:
+- Direct, honest, no-nonsense
+- Science-backed advice
+- Focus on action, not theory
+- Challenge users to push harder
+- Call out excuses immediately
+- Celebrate wins, but keep pushing
+
+You help with:
+- Muscle building & fat loss
+- Testosterone optimization
+- Mental toughness & discipline
+- Style & grooming
+- Sleep & recovery
+- Performance nutrition
+
+Always end with specific action steps.`;
+
   const { messages, sendMessage, addToolResult } = useRorkAgent({
+    systemPrompt: COACH_SYSTEM,
     tools: {
-      recommendProducts: createRorkTool({
-        description: "Recommend beauty products based on user's needs",
+      createWorkoutPlan: createRorkTool({
+        description: "Create a personalized workout plan",
         zodSchema: z.object({
-          products: z.array(z.object({
-            name: z.string(),
-            brand: z.string(),
-            price: z.string(),
-            reason: z.string(),
-            category: z.string()
-          })),
-          skinType: z.string().optional(),
-          concerns: z.array(z.string()).optional()
+          plan: z.object({
+            title: z.string(),
+            duration: z.string(),
+            workoutsPerWeek: z.number(),
+            goal: z.string(),
+            exercises: z.array(z.object({
+              name: z.string(),
+              sets: z.number(),
+              reps: z.string()
+            }))
+          })
         }),
         execute: (input) => {
-          console.log('Product recommendations:', input.products);
-          return `Recommended ${input.products.length} products for your needs`;
+          console.log('Workout plan:', input);
+          return `Created ${input.plan.workoutsPerWeek}x/week plan`;
         }
       }),
       
-      createCustomRoutine: createRorkTool({
-        description: "Create a personalized beauty routine",
+      createNutritionPlan: createRorkTool({
+        description: "Create a personalized nutrition plan",
         zodSchema: z.object({
-          routineType: z.enum(['morning', 'evening', 'weekly']),
-          steps: z.array(z.object({
-            step: z.string(),
-            product: z.string().optional(),
-            duration: z.string().optional(),
-            frequency: z.string().optional()
-          })),
-          skinType: z.string(),
-          goals: z.array(z.string())
+          plan: z.object({
+            dailyCalories: z.number(),
+            protein: z.number(),
+            carbs: z.number(),
+            fats: z.number(),
+            meals: z.array(z.string())
+          })
         }),
         execute: (input) => {
-          console.log('Custom routine created:', input);
-          return `Created ${input.routineType} routine with ${input.steps.length} steps`;
+          console.log('Nutrition plan:', input);
+          return `${input.plan.dailyCalories} cal plan created`;
         }
       }),
 
-      analyzeBeautyConcern: createRorkTool({
-        description: "Analyze specific beauty concerns and provide solutions",
+      trackProgress: createRorkTool({
+        description: "Track transformation progress",
         zodSchema: z.object({
-          concern: z.string(),
-          severity: z.enum(['mild', 'moderate', 'severe']),
-          solutions: z.array(z.string()),
-          timeframe: z.string(),
-          professionalAdvice: z.boolean()
+          assessment: z.string(),
+          wins: z.array(z.string()),
+          nextSteps: z.array(z.string()),
+          motivation: z.string()
         }),
         execute: (input) => {
-          console.log('Beauty concern analyzed:', input);
-          return `Analyzed ${input.concern} with ${input.solutions.length} solutions`;
+          console.log('Progress tracked:', input);
+          return `Progress: ${input.assessment}`;
         }
       })
     }
@@ -148,7 +168,7 @@ export default function AIAdvisorScreen() {
     if (!hasActiveSubscription && dailyQuestionsUsed >= MAX_FREE_QUESTIONS) {
       Alert.alert(
         'Daily Limit Reached',
-        `You've used your ${MAX_FREE_QUESTIONS} free questions today. Upgrade to Premium for unlimited AI beauty consultations!`,
+        `You've used your ${MAX_FREE_QUESTIONS} free coaching sessions today. Upgrade to Premium for unlimited AI coaching!`,
         [
           { text: 'Maybe Later', style: 'cancel' },
           { text: 'Upgrade Now', onPress: () => router.push('/subscribe') }
@@ -179,14 +199,14 @@ export default function AIAdvisorScreen() {
     setInput(question);
   };
 
-  const handleTopicPress = (topic: typeof BEAUTY_TOPICS[0]) => {
+  const handleTopicPress = (topic: typeof COACH_TOPICS[0]) => {
     const topicQuestions = {
-      skincare: "What's the best skincare routine for my skin type?",
-      makeup: "Can you help me with makeup tips for my face shape?",
-      haircare: "How can I improve my hair health and shine?",
-      wellness: "What wellness practices support beautiful skin?",
-      products: "What products should I invest in for my beauty routine?",
-      trends: "What are the latest beauty trends I should know about?"
+      workout: "Create a workout plan for building muscle",
+      nutrition: "What should I eat to build muscle and lose fat?",
+      mindset: "How do I build mental toughness and discipline?",
+      style: "Help me improve my style and grooming routine",
+      recovery: "How can I optimize my sleep and recovery?",
+      testosterone: "How do I increase my testosterone naturally?"
     };
     
     setInput(topicQuestions[topic.id as keyof typeof topicQuestions] || `Tell me about ${topic.title}`);
@@ -207,7 +227,7 @@ export default function AIAdvisorScreen() {
               </LinearGradient>
             )}
           </View>
-          <Text style={styles.messageSender}>{isUser ? 'You' : 'Glow AI'}</Text>
+          <Text style={styles.messageSender}>{isUser ? 'You' : 'Coach AI'}</Text>
         </View>
         
         <View style={[styles.messageBubble, isUser ? styles.userBubble : styles.assistantBubble]}>
@@ -225,7 +245,7 @@ export default function AIAdvisorScreen() {
                 <View key={partIndex} style={styles.toolOutput}>
                   <View style={styles.toolHeader}>
                     <Wand2 color={palette.primary} size={16} />
-                    <Text style={styles.toolTitle}>Beauty Recommendation</Text>
+                    <Text style={styles.toolTitle}>Transformation Plan</Text>
                   </View>
                   <Text style={styles.toolText}>{JSON.stringify(part.output, null, 2)}</Text>
                 </View>
@@ -262,8 +282,8 @@ export default function AIAdvisorScreen() {
             <Bot color={palette.textLight} size={20} />
           </LinearGradient>
           <View>
-            <Text style={styles.headerTitle}>AI Beauty Advisor</Text>
-            <Text style={styles.headerSubtitle}>Your personal beauty expert</Text>
+            <Text style={styles.headerTitle}>AI Transformation Coach</Text>
+            <Text style={styles.headerSubtitle}>Your personal performance coach</Text>
           </View>
         </View>
         
@@ -288,17 +308,17 @@ export default function AIAdvisorScreen() {
             <LinearGradient colors={gradient.shimmer} style={styles.welcomeIcon}>
               <Crown color={palette.primary} size={32} />
             </LinearGradient>
-            <Text style={styles.welcomeTitle}>Welcome to Your AI Beauty Advisor!</Text>
+            <Text style={styles.welcomeTitle}>Welcome to Your AI Coach!</Text>
             <Text style={styles.welcomeSubtitle}>
-              I'm here to help with skincare, makeup, haircare, and all your beauty questions. 
-              What would you like to know?
+              I&apos;m here to help you build muscle, optimize performance, and become your best self. 
+              What&apos;s your goal?
             </Text>
             
             {/* Beauty Topics */}
             <View style={styles.topicsContainer}>
               <Text style={styles.topicsTitle}>Popular Topics</Text>
               <View style={styles.topicsGrid}>
-                {BEAUTY_TOPICS.map((topic) => (
+                {COACH_TOPICS.map((topic) => (
                   <TouchableOpacity
                     key={topic.id}
                     style={[styles.topicCard, { backgroundColor: topic.color + '20' }]}
@@ -341,7 +361,7 @@ export default function AIAdvisorScreen() {
               <Text style={styles.messageSender}>Glow AI</Text>
             </View>
             <View style={[styles.messageBubble, styles.assistantBubble, styles.typingBubble]}>
-              <Text style={styles.typingText}>Thinking about your beauty question...</Text>
+              <Text style={styles.typingText}>Analyzing your goals...</Text>
             </View>
           </View>
         )}
@@ -356,7 +376,7 @@ export default function AIAdvisorScreen() {
           <View style={styles.inputRow}>
             <TextInput
               style={styles.textInput}
-              placeholder="Ask me anything about beauty..."
+              placeholder="Ask me anything about fitness, nutrition, mindset..."
               placeholderTextColor={palette.textMuted}
               value={input}
               onChangeText={setInput}
@@ -379,7 +399,7 @@ export default function AIAdvisorScreen() {
             <View style={styles.limitInfo}>
               <Gem color={palette.primary} size={14} />
               <Text style={styles.limitInfoText}>
-                {dailyQuestionsUsed}/{MAX_FREE_QUESTIONS} free questions used today
+                {dailyQuestionsUsed}/{MAX_FREE_QUESTIONS} free coaching sessions today
               </Text>
               {dailyQuestionsUsed >= MAX_FREE_QUESTIONS && (
                 <TouchableOpacity onPress={() => router.push('/subscribe')}>

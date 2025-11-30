@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Stack, router, useLocalSearchParams } from "expo-router";
-import { Camera, AlertTriangle, RotateCcw, CheckCircle, User, Sparkles, Star, Heart } from "lucide-react-native";
+import { Camera, AlertTriangle, RotateCcw, CheckCircle, User, Sparkles, Star, Heart, Dumbbell, Ruler, TrendingUp } from "lucide-react-native";
 import * as ImagePicker from "expo-image-picker";
 import { LinearGradient } from 'expo-linear-gradient';
 import SubscriptionGuard from '@/components/SubscriptionGuard';
@@ -24,19 +24,31 @@ const { width } = Dimensions.get('window');
 
 interface CapturedPhoto {
   uri: string;
-  angle: 'front' | 'left' | 'right';
+  angle: 'front' | 'side' | 'back';
   timestamp: number;
 }
 
-export default function GlowAnalysisScreen() {
+interface Measurements {
+  weight?: number;
+  chest?: number;
+  waist?: number;
+  hips?: number;
+  arms?: number;
+  thighs?: number;
+  bodyFat?: number;
+}
+
+export default function ProgressTrackingScreen() {
   const { error } = useLocalSearchParams<{ error?: string }>();
   const { theme } = useTheme();
   const { canScan, needsPremium, scansLeft, inTrial, isTrialExpired } = useSubscription();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [showError, setShowError] = useState<boolean>(false);
   const [capturedPhotos, setCapturedPhotos] = useState<CapturedPhoto[]>([]);
-  const [currentAngle, setCurrentAngle] = useState<'front' | 'left' | 'right'>('front');
+  const [currentAngle, setCurrentAngle] = useState<'front' | 'side' | 'back'>('front');
   const [showInstructions, setShowInstructions] = useState<boolean>(true);
+  const [measurements, setMeasurements] = useState<Measurements>({});
+  const [trackingMode, setTrackingMode] = useState<'photos' | 'measurements'>('photos');
   
   const palette = getPalette(theme);
   const gradient = getGradient(theme);
@@ -70,25 +82,25 @@ export default function GlowAnalysisScreen() {
     }
   }, [error]);
 
-  const getAngleInstructions = (angle: 'front' | 'left' | 'right') => {
+  const getAngleInstructions = (angle: 'front' | 'side' | 'back') => {
     switch (angle) {
       case 'front':
         return {
           title: "Front View",
-          instruction: "Look directly at the camera with a gentle, natural expression. Ensure your face is well-lit and centered in the frame.",
-          icon: <User color={palette.primary} size={28} strokeWidth={2.5} />
+          instruction: "Stand facing the camera. Keep arms slightly away from body. Stand in good lighting with neutral expression.",
+          icon: <User color="#FF3366" size={28} strokeWidth={2.5} />
         };
-      case 'left':
+      case 'side':
         return {
-          title: "Left Profile",
-          instruction: "Turn your head 90° to the right so your left profile faces the camera. Keep your chin level and maintain good posture.",
-          icon: <RotateCcw color={palette.secondary} size={28} strokeWidth={2.5} />
+          title: "Side View",
+          instruction: "Turn 90° to show your side profile. Keep good posture, chest up, shoulders back. Arms by your sides.",
+          icon: <RotateCcw color="#00D9FF" size={28} strokeWidth={2.5} />
         };
-      case 'right':
+      case 'back':
         return {
-          title: "Right Profile",
-          instruction: "Turn your head 90° to the left so your right profile faces the camera. Keep your chin level and maintain good posture.",
-          icon: <RotateCcw color={palette.tertiary} size={28} strokeWidth={2.5} style={{ transform: [{ scaleX: -1 }] }} />
+          title: "Back View",
+          instruction: "Face away from camera. Stand straight with arms slightly away from body. Show full back and leg development.",
+          icon: <RotateCcw color="#7B61FF" size={28} strokeWidth={2.5} style={{ transform: [{ scaleX: -1 }] }} />
         };
     }
   };
@@ -126,9 +138,9 @@ export default function GlowAnalysisScreen() {
         setCapturedPhotos(updatedPhotos);
         
         if (currentAngle === 'front') {
-          setCurrentAngle('left');
-        } else if (currentAngle === 'left') {
-          setCurrentAngle('right');
+          setCurrentAngle('side');
+        } else if (currentAngle === 'side') {
+          setCurrentAngle('back');
         } else {
           startMultiAngleAnalysis(updatedPhotos);
         }
@@ -144,7 +156,7 @@ export default function GlowAnalysisScreen() {
     if (photos.length < 3) {
       Alert.alert(
         "Incomplete Capture",
-        "Please capture all three angles (front, left profile, right profile) for the most accurate analysis.",
+        "Please capture all three angles (front, side, back) for the most accurate analysis.",
         [{ text: "Continue Capturing" }]
       );
       return;
@@ -154,14 +166,14 @@ export default function GlowAnalysisScreen() {
       pathname: '/analysis-loading',
       params: { 
         frontImage: photos.find(p => p.angle === 'front')?.uri || '',
-        leftImage: photos.find(p => p.angle === 'left')?.uri || '',
-        rightImage: photos.find(p => p.angle === 'right')?.uri || '',
+        sideImage: photos.find(p => p.angle === 'side')?.uri || '',
+        backImage: photos.find(p => p.angle === 'back')?.uri || '',
         multiAngle: 'true'
       }
     });
   };
 
-  const retakePhoto = (angle: 'front' | 'left' | 'right') => {
+  const retakePhoto = (angle: 'front' | 'side' | 'back') => {
     setCurrentAngle(angle);
     setCapturedPhotos(prev => prev.filter(p => p.angle !== angle));
   };
@@ -379,7 +391,7 @@ export default function GlowAnalysisScreen() {
             <View style={styles.capturedSection}>
               <Text style={styles.capturedTitle}>Captured Photos</Text>
               <View style={styles.capturedGrid}>
-                {['front', 'left', 'right'].map((angle) => {
+                {['front', 'side', 'back'].map((angle) => {
                   const photo = capturedPhotos.find(p => p.angle === angle);
                   return (
                     <View key={angle} style={styles.capturedItem}>
@@ -392,7 +404,7 @@ export default function GlowAnalysisScreen() {
                             </View>
                             <TouchableOpacity 
                               style={styles.retakeButton}
-                              onPress={() => retakePhoto(angle as 'front' | 'left' | 'right')}
+                              onPress={() => retakePhoto(angle as 'front' | 'side' | 'back')}
                             >
                               <Text style={styles.retakeText}>Retake</Text>
                             </TouchableOpacity>
@@ -404,7 +416,7 @@ export default function GlowAnalysisScreen() {
                         )}
                       </View>
                       <Text style={styles.capturedLabel}>
-                        {angle === 'front' ? 'Front' : angle === 'left' ? 'Left Profile' : 'Right Profile'}
+                        {angle === 'front' ? 'Front' : angle === 'side' ? 'Side View' : 'Back View'}
                       </Text>
                     </View>
                   );
@@ -454,11 +466,10 @@ export default function GlowAnalysisScreen() {
           </View>
 
           <View style={styles.professionalNote}>
-            <Text style={styles.noteTitle}>Professional-Grade Analysis</Text>
+            <Text style={styles.noteTitle}>Complete Body Tracking</Text>
             <Text style={styles.noteText}>
-              Our multi-angle capture provides dermatologist-level accuracy by analyzing facial structure, 
-              skin texture, and symmetry from multiple perspectives. This comprehensive approach delivers 
-              the most precise beauty and skin health assessment available.
+              Track your complete transformation with multi-angle photos. See your progress from every angle 
+              and compare week-over-week changes. This comprehensive approach shows exactly where you're improving.
             </Text>
           </View>
         </View>

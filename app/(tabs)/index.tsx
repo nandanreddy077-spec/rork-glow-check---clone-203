@@ -38,11 +38,13 @@ import { getPalette, getGradient, shadow } from "@/constants/theme";
 const { width: screenWidth } = Dimensions.get('window');
 
 const MOTIVATIONS = [
-  "Winners focus on habits. Losers focus on goals.",
-  "Your only limit is you.",
-  "Discipline equals freedom.",
-  "Small actions, massive results.",
-  "Be 1% better every day.",
+  "Greatness is built in the dark.",
+  "Hard work beats talent when talent doesn't work hard.",
+  "Success is the sum of small efforts repeated daily.",
+  "Your competition is waking up. Are you?",
+  "The body achieves what the mind believes.",
+  "Pain is temporary. Regret lasts forever.",
+  "You don't get what you wish for. You get what you work for.",
 ];
 
 const iconMap: Record<string, any> = {
@@ -90,71 +92,79 @@ export default function HomeScreen() {
       
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
         <View style={styles.header}>
-          <View>
-            <Text style={styles.greeting}>APEX PERFORMANCE</Text>
+          <View style={styles.headerLeft}>
+            <Text style={styles.greeting}>LEVEL UP</Text>
             <Text style={styles.name}>
               {authUser?.user_metadata && typeof authUser.user_metadata === 'object' 
                 ? (authUser.user_metadata as { full_name?: string; name?: string }).full_name ?? 
                   (authUser.user_metadata as { full_name?: string; name?: string }).name ?? 
-                  user?.name ?? 'Warrior'
-                : user?.name ?? 'Warrior'}
+                  user?.name ?? 'Champion'
+                : user?.name ?? 'Champion'}
             </Text>
+            <Text style={styles.tagline}>Build your best self</Text>
           </View>
           <TouchableOpacity 
             onPress={() => router.push('/profile')} 
             style={styles.profileButton}
             activeOpacity={0.8}
           >
-            <LinearGradient colors={['#00D9FF', '#00A3CC']} style={styles.profileGradient}>
-              <Trophy color="#FFFFFF" size={20} strokeWidth={2.5} />
+            <LinearGradient colors={['#FF3366', '#FF1744']} style={styles.profileGradient}>
+              <Trophy color="#FFFFFF" size={22} strokeWidth={2.5} fill="#FFFFFF" />
             </LinearGradient>
           </TouchableOpacity>
         </View>
 
         <View style={[styles.mainStatsCard, shadow.card]}>
           <LinearGradient 
-            colors={['#151518', '#1A1A1D']} 
+            colors={['#1a1a1a', '#0d0d0d']} 
             style={styles.mainStatsGradient}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 1 }}
           >
             <View style={styles.statsRow}>
               <View style={styles.statBox}>
-                <View style={[styles.statIconContainer, { backgroundColor: 'rgba(255,51,102,0.2)' }]}>
-                  <Flame color="#FF3366" size={28} strokeWidth={2.5} fill="#FF3366" />
+                <View style={[styles.statIconContainer, { backgroundColor: 'rgba(255,51,102,0.25)' }]}>
+                  <Flame color="#FF3366" size={32} strokeWidth={2.5} fill="#FF3366" />
                 </View>
                 <Text style={styles.statNumber}>{totalStreak}</Text>
-                <Text style={styles.statLabel}>TOTAL STREAKS</Text>
+                <Text style={styles.statLabel}>DAY STREAK</Text>
               </View>
 
               <View style={styles.statDivider} />
 
               <View style={styles.statBox}>
-                <View style={[styles.statIconContainer, { backgroundColor: 'rgba(0,217,255,0.2)' }]}>
-                  <Target color="#00D9FF" size={28} strokeWidth={2.5} />
+                <View style={[styles.statIconContainer, { backgroundColor: 'rgba(0,217,255,0.25)' }]}>
+                  <Target color="#00D9FF" size={32} strokeWidth={2.5} />
                 </View>
                 <Text style={styles.statNumber}>{getTodayCompletedCount}/{getTodayTotalCount}</Text>
-                <Text style={styles.statLabel}>TODAY</Text>
+                <Text style={styles.statLabel}>DONE TODAY</Text>
               </View>
 
               <View style={styles.statDivider} />
 
               <View style={styles.statBox}>
-                <View style={[styles.statIconContainer, { backgroundColor: 'rgba(123,97,255,0.2)' }]}>
-                  <Trophy color="#7B61FF" size={28} strokeWidth={2.5} fill="#7B61FF" />
+                <View style={[styles.statIconContainer, { backgroundColor: 'rgba(123,97,255,0.25)' }]}>
+                  <Trophy color="#7B61FF" size={32} strokeWidth={2.5} fill="#7B61FF" />
                 </View>
                 <Text style={styles.statNumber}>{todayCompletionRate}%</Text>
-                <Text style={styles.statLabel}>COMPLETE</Text>
+                <Text style={styles.statLabel}>WIN RATE</Text>
               </View>
             </View>
           </LinearGradient>
         </View>
 
         <View style={styles.motivationCard}>
-          <View style={styles.motivationIconContainer}>
-            <Zap color="#FFB800" size={20} fill="#FFB800" strokeWidth={2.5} />
-          </View>
-          <Text style={styles.motivationText}>{currentMotivation}</Text>
+          <LinearGradient 
+            colors={['#FF3366', '#FF1744']}
+            style={styles.motivationGradient}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+          >
+            <View style={styles.motivationIconContainer}>
+              <Zap color="#FFFFFF" size={22} fill="#FFFFFF" strokeWidth={2.5} />
+            </View>
+            <Text style={styles.motivationText}>{currentMotivation}</Text>
+          </LinearGradient>
         </View>
 
         <View style={styles.section}>
@@ -244,7 +254,7 @@ export default function HomeScreen() {
             style={[styles.actionCard, shadow.card]}
           >
             <LinearGradient 
-              colors={['#FF6B35', '#F97316']}
+              colors={['#FF3366', '#FF1744']}
               style={styles.actionCardGradient}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 1 }}
@@ -254,8 +264,8 @@ export default function HomeScreen() {
                   <Target color="#FFFFFF" size={32} strokeWidth={2.5} />
                 </View>
                 <View style={styles.actionTextContainer}>
-                  <Text style={styles.actionTitle}>Progress Scan</Text>
-                  <Text style={styles.actionSubtitle}>Track your transformation</Text>
+                  <Text style={styles.actionTitle}>Track Progress</Text>
+                  <Text style={styles.actionSubtitle}>Log body photos & measurements</Text>
                 </View>
               </View>
               <ChevronRight color="#FFFFFF" size={24} strokeWidth={2.5} />
@@ -331,18 +341,28 @@ const createStyles = (palette: ReturnType<typeof getPalette>) => StyleSheet.crea
     paddingTop: 20,
     paddingBottom: 24,
   },
+  headerLeft: {
+    flex: 1,
+  },
   greeting: {
-    fontSize: 12,
+    fontSize: 11,
     color: palette.textMuted,
     fontWeight: '800' as const,
-    letterSpacing: 2,
-    marginBottom: 4,
+    letterSpacing: 2.5,
+    marginBottom: 6,
   },
   name: {
-    fontSize: 32,
+    fontSize: 36,
     fontWeight: '900' as const,
     color: palette.textPrimary,
-    letterSpacing: -1,
+    letterSpacing: -1.2,
+    marginBottom: 4,
+  },
+  tagline: {
+    fontSize: 13,
+    fontWeight: '700' as const,
+    color: palette.textSecondary,
+    letterSpacing: 0.3,
   },
   profileButton: {
     borderRadius: 20,
@@ -401,20 +421,20 @@ const createStyles = (palette: ReturnType<typeof getPalette>) => StyleSheet.crea
   },
   motivationCard: {
     marginHorizontal: 24,
-    backgroundColor: palette.surface,
     borderRadius: 16,
+    overflow: 'hidden',
+    marginBottom: 32,
+  },
+  motivationGradient: {
     padding: 20,
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 32,
-    borderWidth: 1,
-    borderColor: palette.border,
   },
   motivationIconContainer: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: 'rgba(255,184,0,0.2)',
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: 'rgba(255,255,255,0.2)',
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 16,
@@ -422,10 +442,10 @@ const createStyles = (palette: ReturnType<typeof getPalette>) => StyleSheet.crea
   motivationText: {
     flex: 1,
     fontSize: 14,
-    fontWeight: '700' as const,
-    color: palette.textPrimary,
+    fontWeight: '800' as const,
+    color: '#FFFFFF',
     lineHeight: 20,
-    letterSpacing: 0.2,
+    letterSpacing: 0.3,
   },
   section: {
     paddingHorizontal: 24,
