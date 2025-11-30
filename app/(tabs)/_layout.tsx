@@ -1,5 +1,5 @@
 import { Tabs } from "expo-router";
-import { Heart, Wand2, Users, User } from "lucide-react-native";
+import { Target, TrendingUp, Users, User } from "lucide-react-native";
 import React, { useState, useEffect } from "react";
 import { View, Platform } from "react-native";
 import AuthGuard from "@/components/AuthGuard";
@@ -68,14 +68,14 @@ export default function TabLayout() {
         <Tabs.Screen
           name="index"
           options={{
-            title: "Glow",
+            title: "Dashboard",
             tabBarIcon: ({ color, size, focused }) => (
               <View style={{ 
                 padding: 8, 
                 borderRadius: 16, 
                 backgroundColor: focused ? palette.overlayBlush : 'transparent' 
               }}>
-                <Heart 
+                <Target 
                   color={focused ? palette.primary : color} 
                   size={focused ? 22 : 20}
                   strokeWidth={focused ? 2.5 : 2}
@@ -88,14 +88,14 @@ export default function TabLayout() {
         <Tabs.Screen
           name="glow-coach"
           options={{
-            title: "Coach",
+            title: "Performance",
             tabBarIcon: ({ color, size, focused }) => (
               <View style={{ 
                 padding: 8, 
                 borderRadius: 16, 
                 backgroundColor: focused ? palette.overlayLavender : 'transparent' 
               }}>
-                <Wand2 
+                <TrendingUp 
                   color={focused ? palette.lavender : color} 
                   size={focused ? 22 : 20}
                   strokeWidth={focused ? 2.5 : 2}
@@ -107,7 +107,7 @@ export default function TabLayout() {
         <Tabs.Screen
           name="community"
           options={{
-            title: "Circle",
+            title: "Community",
             tabBarIcon: ({ color, size, focused }) => (
               <View style={{ 
                 padding: 8, 
@@ -126,7 +126,7 @@ export default function TabLayout() {
         <Tabs.Screen
           name="profile"
           options={{
-            title: "You",
+            title: "Profile",
             tabBarIcon: ({ color, size, focused }) => (
               <View style={{ 
                 padding: 8, 
