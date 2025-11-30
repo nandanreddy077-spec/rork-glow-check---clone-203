@@ -3,7 +3,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import createContextHook from '@nkzw/create-context-hook';
 import { Platform } from 'react-native';
 import { paymentService, PRODUCT_IDS, trackPurchaseEvent, trackTrialStartEvent } from '@/lib/payments';
-import { supabase } from '@/lib/supabase';
 import { useAuth } from '@/contexts/AuthContext';
 
 export interface SubscriptionState {
@@ -159,43 +158,11 @@ export const [SubscriptionProvider, useSubscription] = createContextHook<Subscri
     await persist(next);
   }, [persist, state]);
 
-  // Sync subscription status with backend
+  // Sync subscription status with backend (placeholder for future backend)
   const syncSubscriptionStatus = useCallback(async () => {
     if (!user?.id) return;
-    
-    try {
-      console.log('Syncing subscription status with backend...');
-      
-      // Check if backend is properly configured
-      const { data: functions } = await supabase.rpc('get_user_subscription_status', { user_id: user.id }).catch(() => ({ data: null, error: null }));
-      
-      // If the function doesn't exist or there's an error, just log and continue
-      // The app works fine with local state
-      if (!functions) {
-        console.log('Backend subscription sync not available - using local state only');
-        return;
-      }
-      
-      console.log('Backend subscription status:', functions);
-      
-      if (functions && functions.length > 0) {
-        const subscription = functions[0];
-        
-        // Update local state with backend data
-        const backendState: Partial<SubscriptionState> = {
-          isPremium: subscription.is_premium,
-          subscriptionType: subscription.subscription_product_id?.includes('annual') ? 'yearly' : 'monthly',
-          subscriptionPrice: subscription.subscription_product_id?.includes('annual') ? 99 : 8.99,
-          nextBillingDate: subscription.expires_at,
-        };
-        
-        await setSubscriptionData(backendState);
-      }
-    } catch (error) {
-      // Silently fail - the app works fine with local subscription state
-      console.log('Backend subscription sync unavailable - continuing with local state');
-    }
-  }, [user?.id, setSubscriptionData]);
+    console.log('Subscription sync placeholder - no backend configured');
+  }, [user?.id]);
   
   const processInAppPurchase = useCallback(async (type: 'monthly' | 'yearly'): Promise<{ success: boolean; purchaseToken?: string; originalTransactionId?: string; error?: string }> => {
     try {
@@ -232,23 +199,9 @@ export const [SubscriptionProvider, useSubscription] = createContextHook<Subscri
           originalTransactionId: result.transactionId,
         });
         
-        // Sync with backend after successful purchase
+        // Backend sync placeholder
         if (user?.id) {
-          try {
-            // Update user's RevenueCat user ID in Supabase
-            await supabase
-              .from('user_profiles')
-              .update({ 
-                revenuecat_user_id: user.id,
-                subscription_status: 'premium',
-                subscription_product_id: productId,
-                updated_at: new Date().toISOString()
-              })
-              .eq('id', user.id);
-          } catch (backendError) {
-            console.error('Failed to update backend subscription status:', backendError);
-            // Don't fail the purchase if backend update fails
-          }
+          console.log('Backend sync skipped - no backend configured');
         }
         
         return { 

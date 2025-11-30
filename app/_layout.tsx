@@ -39,9 +39,6 @@ function RootLayoutNav() {
     <Stack screenOptions={{ headerBackTitle: "Back" }}>
       <Stack.Screen name="(tabs)" options={{ headerShown: false, gestureEnabled: false }} />
       <Stack.Screen name="onboarding" options={{ headerShown: false }} />
-      <Stack.Screen name="login" options={{ headerShown: false }} />
-      <Stack.Screen name="signup" options={{ headerShown: false }} />
-      <Stack.Screen name="forgot-password" options={{ headerShown: false }} />
       <Stack.Screen name="glow-analysis" options={{ headerShown: true, headerBackTitle: "Back" }} />
       <Stack.Screen name="analysis-loading" options={{ headerShown: false }} />
       <Stack.Screen name="analysis-results" options={{ headerShown: true, headerBackTitle: "Back" }} />

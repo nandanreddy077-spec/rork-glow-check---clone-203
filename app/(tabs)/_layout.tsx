@@ -2,7 +2,7 @@ import { Tabs } from "expo-router";
 import { Target, TrendingUp, Users, User } from "lucide-react-native";
 import React, { useState, useEffect } from "react";
 import { View, Platform } from "react-native";
-import AuthGuard from "@/components/AuthGuard";
+
 import { palette } from "@/constants/theme";
 import ProfilePicturePopup from "@/components/ProfilePicturePopup";
 import { useUser } from "@/contexts/UserContext";
@@ -30,7 +30,7 @@ export default function TabLayout() {
   };
 
   return (
-    <AuthGuard>
+    <>
       <ProfilePicturePopup 
         visible={showProfilePopup} 
         onClose={handleCloseProfilePopup} 
@@ -149,6 +149,6 @@ export default function TabLayout() {
           }}
         />
       </Tabs>
-    </AuthGuard>
+    </>
   );
 }
