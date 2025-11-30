@@ -14,6 +14,7 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { CommunityProvider } from "@/contexts/CommunityContext";
 import { ProductProvider } from "@/contexts/ProductContext";
+import { HabitsProvider } from "@/contexts/HabitsContext";
 import ErrorBoundary from "@/components/ErrorBoundary";
 
 import { initializeNotifications } from "@/lib/notifications";
@@ -85,7 +86,8 @@ export default function RootLayout() {
         <ThemeProvider>
             <AuthProvider>
               <UserProvider>
-                <GamificationProvider>
+                <HabitsProvider>
+                  <GamificationProvider>
                   <AnalysisProvider>
                     <SkincareProvider>
                       <StyleProvider>
@@ -102,7 +104,8 @@ export default function RootLayout() {
                       </StyleProvider>
                     </SkincareProvider>
                   </AnalysisProvider>
-                </GamificationProvider>
+                  </GamificationProvider>
+                </HabitsProvider>
               </UserProvider>
             </AuthProvider>
         </ThemeProvider>
